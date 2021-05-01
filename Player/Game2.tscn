@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/Old Man.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Epic_BlueSunset_EquiRect_flat.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 3 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.52549, 0.556863, 0.588235, 1 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 50 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.286275, 0.313726, 0.341176, 1 )
+metallic = 1.0
+roughness = 0.02
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( 20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, -20 )
+
+[node name="Game" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 48.9684, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="Old Man" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.642853, 0, 0.766123, 0, 1, 0, -0.766123, 0, 0.642853, -44.6487, 0, -22.0963 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 53.7052, 2.736, -0.365601 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.79099, 32.9136 )
+light_energy = 5.0

@@ -1,0 +1,189 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Player/Old Man.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Epic_BlueSunset_EquiRect_flat.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Obstacle/Obstacle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Obstacle/Obstacle.gd" type="Script" id=5]
+[ext_resource path="res://Key/key.tscn" type="PackedScene" id=6]
+[ext_resource path="res://SFX/SFX.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Obstacle/Globe.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/The Biggest Discovery.ogg" type="AudioStream" id=9]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=10]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.52549, 0.556863, 0.588235, 1 )
+
+[sub_resource type="PlaneMesh" id=7]
+size = Vector2( 20, 6 )
+
+[sub_resource type="SpatialMaterial" id=8]
+metallic = 1.0
+roughness = 0.02
+
+[sub_resource type="ConvexPolygonShape" id=9]
+points = PoolVector3Array( 10, 0, 3, -10, 0, 3, 10, 0, -3, -10, 0, -3 )
+
+[sub_resource type="PlaneMesh" id=10]
+size = Vector2( 20, 6 )
+
+[sub_resource type="SpatialMaterial" id=11]
+metallic = 1.0
+roughness = 0.02
+
+[sub_resource type="ConvexPolygonShape" id=12]
+points = PoolVector3Array( 10, 0, 3, -10, 0, 3, 10, 0, -3, -10, 0, -3 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 50 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.286275, 0.313726, 0.341176, 1 )
+metallic = 1.0
+roughness = 0.02
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( 50, 0, 25, -50, 0, 25, 50, 0, -25, -50, 0, -25 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "ObstacleAnimation"
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 8, 12, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -28.386, 0, 0 ), Vector3( -28.386, 0, 22.739 ), Vector3( -28.386, 0, 0 ), Vector3( -28.386, 0, -23.0798 ), Vector3( -28.386, 0, 0 ) ]
+}
+
+[node name="Game2" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Plank1" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Plank1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Plank1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="Plank2" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Plank2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, -15 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Plank2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, -15 )
+shape = SubResource( 12 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Ground"]
+shape = SubResource( 5 )
+
+[node name="Globe" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9512, 0, -12.9493 )
+
+[node name="Globe5" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 96.6533, 2.89338, -16.9874 )
+
+[node name="Globe11" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -88.8973, 10.3144, 21.0924 )
+
+[node name="Globe8" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50022, 2.89338, -80.6663 )
+
+[node name="Globe6" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 111.517, -6.93451, 28.6879 )
+
+[node name="Globe10" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -77.4889, -6.93451, -10.3543 )
+
+[node name="Globe7" parent="." instance=ExtResource( 8 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 166.984, 5.10485, 8.89816 )
+
+[node name="Globe9" parent="." instance=ExtResource( 8 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -36.5524, -11.0572, -111.878 )
+
+[node name="Globe4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -11.891, 0, -12.9493 )
+
+[node name="Globe3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.8218, 0, 16.806 )
+
+[node name="Globe2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.78912, 0, 13.85 )
+
+[node name="Obstacle" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.386, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Obstacle"]
+autoplay = "ObstacleAnimation"
+anims/ObstacleAnimation = SubResource( 6 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 46.2414, 1.51064, 0 )
+
+[node name="Old Man" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.642853, 0, 0.766123, 0, 1, 0, -0.766123, 0, 0.642853, -44.6487, 0, -22.0963 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 53.7052, 2.736, -0.365601 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.79099, 32.9136 )
+light_energy = 5.0
+
+[node name="key" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, 37.4448, 2, 0 )
+
+[node name="key7" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, -76.7051, 4.24819, -10.2521 )
+
+[node name="key6" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, -4.84779, 2, 3.57267 )
+
+[node name="key5" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, -46.3057, 2, 19.6891 )
+
+[node name="key4" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, 68.7193, 2, 0 )
+
+[node name="key3" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, 7.09018, 2, 23.9593 )
+
+[node name="key2" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, 16.0382, 2, -18.3022 )
+
+[node name="SFX" parent="." instance=ExtResource( 7 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+autoplay = true
+
+[node name="UI" parent="." instance=ExtResource( 10 )]
+[connection signal="body_entered" from="Obstacle" to="Obstacle" method="_on_Obstacle_body_entered"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Epic_BlueSunset_EquiRect_flat.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Old Man.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game.gd" type="Script" id=4]
+[ext_resource path="res://Assets/I Miss You.ogg" type="AudioStream" id=5]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.52549, 0.556863, 0.588235, 1 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 50 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.286275, 0.313726, 0.341176, 1 )
+metallic = 1.0
+roughness = 0.02
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( 20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, -20 )
+
+[node name="Game" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.642787, 0, -0.766044, 0, 1, 0, 0.766044, 0, 0.642787, 3.80367, 0, 0 )
+
+[node name="Old Man" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.642853, 0, 0.766123, 0, 1, 0, -0.766123, 0, 0.642853, -3.8947, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.88352, -13.0351 )
+current = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.79099, 32.9136 )
+light_energy = 5.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+autoplay = true
