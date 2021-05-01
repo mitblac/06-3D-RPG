@@ -22,10 +22,6 @@ Music sourced from:
 SFX sourced from:
 - https://freesound.org/
 
-Tutorial Channels Referenced:
-- https://www.youtube.com/channel/UCs5J4GVRB8s2P4hE-O0izrg
-- https://www.youtube.com/channel/UCdioEctcBLd2nw2aQkl8msw
-
 ## Included Features
 
 - user-controlled, animated, third-person 3D player
@@ -42,7 +38,9 @@ Tutorial Channels Referenced:
 
 ## References
 
-N/A
+Tutorial Channels Referenced:
+- https://www.youtube.com/channel/UCs5J4GVRB8s2P4hE-O0izrg
+- https://www.youtube.com/channel/UCdioEctcBLd2nw2aQkl8msw
 
 ## Future Development
 
